@@ -1,4 +1,6 @@
 plugins {
+    id "war"
+    id "application"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.0.4"
     id("io.micronaut.aot") version "4.0.4"
@@ -12,11 +14,20 @@ repositories {
 }
 
 dependencies {
+    developmentOnly("io.micronaut.servlet:micronaut-http-server-jetty:1.0.2")
+    implementation("io.micronaut.servlet:micronaut-servlet-engine:1.0.2")
+     implementation("io.micronaut:micronaut-http-client")
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     runtimeOnly("ch.qos.logback:logback-classic")
     testImplementation("io.micronaut:micronaut-http-client")
+}
+
+apply plugin: 'war'
+war {
+    archiveBaseName = 'app2'
+    archiveFileName = 'app2.war'
 }
 
 
